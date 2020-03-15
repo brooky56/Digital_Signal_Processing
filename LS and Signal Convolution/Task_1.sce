@@ -11,12 +11,18 @@ for i = 1:4
 
     // Our signal (sound)
     [x, Fs_x, x_bits] = wavread("C:\Users\work\OneDrive\Documents\SciLab\lab_v3\" + signal_name(i));
-
-    irc = zeros (1, length(h)- 1)
-    signal = zeros (1, length(x) - 1)
-
-    x_signal = [x irc];
-    h_irc = [h signal];
+    
+    x = x(1, :)
+    h = h(1, :)
+    h = h*0.01
+    
+    shift = length(h) + length(x) -1;
+    
+    irc = zeros (1, shift - length(h));
+    signal = zeros (1, shift - length(x));
+    
+    x_signal = [x signal];
+    h_irc = [h irc];
 
     ch = input('Choose: 1(Selfmade) or 0(Convol)');
 
