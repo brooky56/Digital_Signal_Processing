@@ -14,6 +14,8 @@ for i = 1:4
     
     x = x(1, :)
     h = h(1, :)
+    
+    // Amplitude fixing
     h = h*0.01
     
     shift = length(h) + length(x) -1;
@@ -31,18 +33,18 @@ for i = 1:4
         tic();
         result = ifft(fft(x_signal) .* fft(h_irc));
         t = toc();
-        disp(t);
+        disp('Our time', t);
         subplot(4, 2, i * 2);
         plot(result, "-b");
         xtitle(signal_name(i) + " with our IRC");
     end;
     
-    if(ch == 1)
-        // Convolution from scilab
+    if(ch == 0)
+        // Convolution from Scilab
         tic();
         result = convol(x, h);     
         t = toc();
-        disp(t);
+        disp('Scilab convol time', t);
         subplot(4, 2, i * 2 - 1);
         plot(result, "-r");
         xtitle(signal_name(i) + " with our IRC of Scilab function");
