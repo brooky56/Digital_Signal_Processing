@@ -9,14 +9,14 @@ exec('cshift.sci')
 load("signal_with_noise_and_filtered.sod")
 //-----------------------------------------------------------------------------
 //Generate filters
-high = ideal_highpass(1024, 0.001, 0.);
+high = ideal_highpass(1024, 0.003, 0.15);
 high_len = length(high)
 frequencies_high = (0:high_len-1)/high_len * Fs;
 highpass = real(ifft(high))
 //shifting
 highpass = cshift(highpass, [0 (high_len - modulo(high_len,2))/2])
 
-low = ideal_lowpass(1024, 0.15, 0.);
+low = ideal_lowpass(1024, 0.15, 0.003);
 low_len = length(low)
 frequencies_low = (0:low_len-1)/low_len * Fs;
 lowpass = real(ifft(low))
